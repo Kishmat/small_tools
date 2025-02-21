@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate URL</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        h1{
+            margin-top: 30px;
+            text-align: center;
+        }
+        input{
+            background: #121212;
+            border: 1px solid;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <h1>New Season</h1>
+    <input type="text" id="url" onkeyup="get_the_urls(event)" placeholder="URL">
+    <script>
+        function get_the_urls(eve)
+        {
+            if(eve.keyCode == 13) // check for enter
+            {
+                let input = eve.target.value;
+                if(input.includes('https://s3taku.one/'))
+                {
+                    input = input.split('https://s3taku.one/')[1];
+                    input = input.split('/')[0];
+                    input = input.split('-episode-');
+
+                    let anime = input[0];
+                    let episdoe = Number(input[1]);
+
+                    for(let i=1;i<=10;i++)
+                    {
+                        let url = "https://s3taku.one/"+anime+"-episode-"+(episdoe + i)+"/";
+                        window.open(url, '_blank');
+                    }
+                }else{
+                    alert("INVALID URL");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
